@@ -18,11 +18,11 @@ def get_changed_files():
     if len(file_list) == 0:
         exit()
     for line in file_list:
+        print("line is " + line)
         if line == '0':
             continue
         try:
             change, filename = line.strip().split('\t')
-            print(filename)
             if filename.endswith(FILE_EXTENSION_IPYNB) and change != 'D':
                 files.append(filename)
         except Exception:
