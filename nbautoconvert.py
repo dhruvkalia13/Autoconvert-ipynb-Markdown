@@ -14,7 +14,6 @@ def get_changed_files():
     output = (subprocess.run(['git', 'diff', '--name-status'], stdout=subprocess.PIPE)).stdout.decode(
         "utf-8").strip()
     file_list = output.split("\n")
-    print("file_list has " + str(len(file_list)))
     if len(file_list) == 0:
         exit()
     for line in file_list:
