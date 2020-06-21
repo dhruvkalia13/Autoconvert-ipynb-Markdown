@@ -8,7 +8,7 @@ Freely make changes in your notebook, as from now everytime you commit any chang
 
 ## Pre-commit hook
 
-  This pre-commit hook gets triggered even before you've set the commit message. Further more, this invokes the nbautoconvert residing at the root of the project.  
+  This pre-commit hook gets triggered even before you've set the commit message. Further more, this invokes the nbautoconvert residing at the root of the project.
 
 ## Core script
 
