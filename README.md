@@ -5,7 +5,7 @@
   To fireup, copy the nbautoconvert sciprt from here to the root of your repository. Next, you need to place pre-commit hook inside repo/.git/hooks/ and you're good to go! 
 
 ## Usage
-Freely make changes in your notebook, as from now on,  everytime you commit any change in your notebook, your README will be automatically rendered with your updated notebook. This visualization will also include the output images from notebook and will be captured inside README_files directory. Linking between these images and README.md is also auto-configured. 
+The usage is as simple as git commit because that's all you've to do and rest will be done by the script. Freely make changes in your notebook, as from now on, everytime you commit any change in your notebook, your README will be automatically rendered with your updated notebook. This visualization will also include the output images from notebook and will be captured inside README_files directory. Linking between these images and README.md is also auto-configured. 
 
 ## Pre-commit hook
 
