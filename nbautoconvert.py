@@ -1,30 +1,51 @@
+#!/usr/bin/env python
+import subprocess
 import sys
+import os
+
+COMMAND_GET_CHANGED_FILES = "git diff --cached --name-status"
+FILE_EXTENSION_IPYNB = ".ipynb"
+output_file_name = "README"
 
 
-def setup():
-	print("Setting up...")
-	# We need to create pre-commit hook 
-    src = '../../nb_auto_convert'
-    dst = '.git/hooks/pre-commit'
-    try:
-        os.symlink(src, dst)
-        print("Creating symbolic link from %s to %s" % (src, dst))
-    except OSError as e:
-        if 'File exists' in e.strerror:
-            print('Err... Pre-commit hook file already exists.')
-        else:
-            raise e
+def get_changed_files():
+    # Get ipynb files from 'files to commit' git cache list.
+    files = []
+    filelist1 = (subprocess.run(['git', 'diff', '--cached', '--name-status'], stdout=subprocess.PIPE)).stdout.decode(
+        "utf-8").strip()
+    for line in filelist1.split("\n"):
+        if line == '0':
+            continue
+        try:
+            change, filename = line.strip().split('\t')
+            print(filename)
+            if filename.endswith(FILE_EXTENSION_IPYNB) and change != 'D':
+                files.append(filename)
+        except Exception:
+            raise
+    return files
+
+
+def convert(file):
+    print("inside convert func")
+    output_dir = os.getcwd()
+    print("output_dir is " + output_dir)
+    args = ['jupyter', 'nbconvert', '--to', 'markdown', file, '--output',
+                       output_file_name]
+    convert_command = ' '.join(args)
+    print("convert command is " + convert_command)
+    out = (subprocess.run(convert_command, stdout=subprocess.PIPE)).stdout.decode("utf-8").strip()
+    print(file + " converted ")
+    print(out)
     exit()
 
 
 def main():
-	# get list of all changed files
-	# if ipynp file is changed, then execute the command
-	
+    files = get_changed_files()
+    if len(files) == 0:
+        exit()
+    convert(files)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        if sys.argv[1] == "setup":
-            setup()
     main()
