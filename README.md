@@ -1,10 +1,11 @@
 ## nbautoconvert
-  Without any plugin support, convert your jupyter notebook directly to markdown (README.md)!  
+  Without any plugin support, automatically convert jupyter notebook to markdown (README.md) as soon as you commit changes in notebook!!  
 
 ## Setup
-  To fireup, copy the nbautoconvert file from here to the root of your repository. Next, you need to place this pre-commit inside repo/.git/hooks/. That's it! 
+  To fireup, copy the nbautoconvert sciprt from here to the root of your repository. Next, you need to place pre-commit hook inside repo/.git/hooks/ and you're good to go! 
 
-Freely make changes in your notebook, as from now everytime you commit any change in your notebook, your README will be automatically rendered with your notebook. This rendering also includes the outputs of notebook and will be captured inside README_files. Linking between output and README.md is also auto-configured. 
+## Usage
+Freely make changes in your notebook, as from now on,  everytime you commit any change in your notebook, your README will be automatically rendered with your updated notebook. This visualization will also include the output images from notebook and will be captured inside README_files directory. Linking between these images and README.md is also auto-configured. 
 
 ## Pre-commit hook
 
