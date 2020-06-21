@@ -18,8 +18,7 @@ def get_changed_files():
     if len(file_list) == 0:
         exit()
     for line in file_list:
-        print("line is " + line)
-        if line == '0':
+        if line == '0' or line == '':
             continue
         try:
             change, filename = line.strip().split('\t')
