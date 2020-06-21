@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 import subprocess
-import sys
-import os
 
 COMMAND_GET_CHANGED_FILES = "git diff --cached --name-status"
 FILE_EXTENSION_IPYNB = ".ipynb"
