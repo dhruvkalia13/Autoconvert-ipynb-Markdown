@@ -11,9 +11,13 @@ output_file_name = "README"
 def get_changed_files():
     # Get ipynb files from 'files to commit' git cache list.
     files = []
-    filelist1 = (subprocess.run(['git', 'diff', '--cached', '--name-status'], stdout=subprocess.PIPE)).stdout.decode(
+    output = (subprocess.run(['git', 'diff', '--name-status'], stdout=subprocess.PIPE)).stdout.decode(
         "utf-8").strip()
-    for line in filelist1.split("\n"):
+    file_list = output.split("\n")
+    print("file_list has " + str(len(file_list)))
+    if len(file_list) == 0:
+        exit()
+    for line in file_list:
         if line == '0':
             continue
         try:
@@ -26,17 +30,16 @@ def get_changed_files():
     return files
 
 
-def convert(file):
-    print("inside convert func")
+def convert(files):
+    if len(files) == 0:
+        exit()
+    file = files[0]
     output_dir = os.getcwd()
-    print("output_dir is " + output_dir)
     args = ['jupyter', 'nbconvert', '--to', 'markdown', file, '--output',
-                       output_file_name]
+            output_file_name]
     convert_command = ' '.join(args)
-    print("convert command is " + convert_command)
-    out = (subprocess.run(convert_command, stdout=subprocess.PIPE)).stdout.decode("utf-8").strip()
-    print(file + " converted ")
-    print(out)
+    (subprocess.run(convert_command, stdout=subprocess.PIPE)).stdout.decode("utf-8").strip()
+    print(file + " converted through hook")
     exit()
 
 
